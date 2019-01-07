@@ -65,3 +65,4 @@ target/
 models/
 training/
 log/
+.vscode
