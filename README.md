@@ -1,4 +1,4 @@
-# Using Python programming to Play Grand Theft Auto 5
+# Self-Driving Car in Grand Theft Auto 5
 
 Explorations of Using Python to play Grand Theft Auto 5, mainly for the purposes of creating self-driving cars and other vehicles.
 
@@ -19,3 +19,8 @@ Finally, use the model in game with test_model.py.
 ...you'll probably want to poke into the tutorials here: https://pythonprogramming.net/game-frames-open-cv-python-plays-gta-v/. If you need tutorials on deep learning, or tensorflow, or tflearn, see here: https://pythonprogramming.net/tensorflow-introduction-machine-learning-tutorial/
 
 Do you know of some relevant papers/research/models for this project? Share with us here: https://github.com/Sentdex/pygta5/issues/11
+
+tensorboard --logdir=foo:C:/path/to/log
+
+### Credits
+[sentdex](https://github.com/Sentdex/pygta5)
