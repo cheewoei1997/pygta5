@@ -8,17 +8,18 @@ from tqdm import tqdm
 from collections import deque
 from models import inception_v3 as googlenet
 from random import shuffle
+import tensorflow as tf
 
 
-FILE_I_END = 1860
+FILE_I_END = 109
 
-WIDTH = 480
-HEIGHT = 270
+WIDTH = 400
+HEIGHT = 300
 LR = 1e-3
 EPOCHS = 30
 
-MODEL_NAME = ''
-PREV_MODEL = ''
+MODEL_NAME = 'models/testv4.1-{}-{}.model'.format(LR, EPOCHS)
+PREV_MODEL = 'models/testv4.1-{}-{}.model'.format(LR, EPOCHS)
 
 LOAD_MODEL = True
 
@@ -55,15 +56,16 @@ if LOAD_MODEL:
 
 for e in range(EPOCHS):
     #data_order = [i for i in range(1,FILE_I_END+1)]
+    print('EPOCH: ', e)
     data_order = [i for i in range(1,FILE_I_END+1)]
     shuffle(data_order)
     for count,i in enumerate(data_order):
         
         try:
-            file_name = 'J:/phase10-random-padded/training_data-{}.npy'.format(i)
+            file_name = 'C:/Github/pygta5/training/training5/training5_data-{}v2.npy'.format(i)
             # full file info
             train_data = np.load(file_name)
-            print('training_data-{}.npy'.format(i),len(train_data))
+            print('training5_data-{}.npy'.format(i),len(train_data))
 
 ##            # [   [    [FRAMES], CHOICE   ]    ] 
 ##            train_data = []
@@ -88,16 +90,21 @@ for e in range(EPOCHS):
             X = np.array([i[0] for i in train]).reshape(-1,WIDTH,HEIGHT,3)
             Y = [i[1] for i in train]
 
+            gpu_options = tf.GPUOptions(allow_growth=True)
+
             test_x = np.array([i[0] for i in test]).reshape(-1,WIDTH,HEIGHT,3)
             test_y = [i[1] for i in test]
 
             model.fit({'input': X}, {'targets': Y}, n_epoch=1, validation_set=({'input': test_x}, {'targets': test_y}), 
-                snapshot_step=2500, show_metric=True, run_id=MODEL_NAME)
+                snapshot_step=2500, show_metric=True, run_id=MODEL_NAME, batch_size=4)
 
 
-            if count%10 == 0:
-                print('SAVING MODEL!')
-                model.save(MODEL_NAME)
+            # if count%100 == 0:
+            #     print('SAVING MODEL!')
+            #     model.save(MODEL_NAME)
+
+            print('SAVING MODEL!')
+            model.save(MODEL_NAME)
                     
         except Exception as e:
             print(str(e))
@@ -113,5 +120,5 @@ for e in range(EPOCHS):
 
 #
 
-#tensorboard --logdir=foo:J:/phase10-code/log
+#tensorboard --logdir=foo:C:/Github/pygta5
 

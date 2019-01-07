@@ -5,6 +5,12 @@ import time
 from getkeys import key_check
 import os
 
+WIDTH = 400
+HEIGHT = 300
+
+GAME_WIDTH = 800
+GAME_HEIGHT = 600
+
 w = [1,0,0,0,0,0,0,0,0]
 s = [0,1,0,0,0,0,0,0,0]
 a = [0,0,1,0,0,0,0,0,0]
@@ -18,7 +24,7 @@ nk = [0,0,0,0,0,0,0,0,1]
 starting_value = 1
 
 while True:
-    file_name = 'training_data-{}.npy'.format(starting_value)
+    file_name = 'training5_data-{}v1.npy'.format(starting_value)
 
     if os.path.isfile(file_name):
         print('File exists, moving along',starting_value)
@@ -72,18 +78,24 @@ def main(file_name, starting_value):
     while(True):
         
         if not paused:
-            screen = grab_screen(region=(0,40,1920,1120))
+            screen = grab_screen(region=(0,40,GAME_WIDTH,GAME_HEIGHT+30))
             last_time = time.time()
             # resize to something a bit more acceptable for a CNN
-            screen = cv2.resize(screen, (480,270))
+            screen = cv2.resize(screen, (WIDTH, HEIGHT))
             # run a color convert:
             screen = cv2.cvtColor(screen, cv2.COLOR_BGR2RGB)
+
+            # Show what is captured
+            # cv2.imshow('window', screen)
             
             keys = key_check()
             output = keys_to_output(keys)
             training_data.append([screen,output])
 
-            #print('loop took {} seconds'.format(time.time()-last_time))
+            # Show training data array
+            # print(training_data)
+
+            print('loop took {} seconds'.format(time.time()-last_time))
             last_time = time.time()
 ##            cv2.imshow('window',cv2.resize(screen,(640,360)))
 ##            if cv2.waitKey(25) & 0xFF == ord('q'):
@@ -98,7 +110,7 @@ def main(file_name, starting_value):
                     print('SAVED')
                     training_data = []
                     starting_value += 1
-                    file_name = 'X:/pygta5/phase7-larger-color/training_data-{}.npy'.format(starting_value)
+                    file_name = 'C:/Github/pygta5/training5/training5_data-{}v2.npy'.format(starting_value)
 
                     
         keys = key_check()
