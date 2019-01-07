@@ -126,7 +126,7 @@ def no_keys():
 sleep_duration = 0.1
 
 model = googlenet(WIDTH, HEIGHT, 3, LR, output=9)
-MODEL_NAME = 'models/testv3-0.001-30.model'
+MODEL_NAME = 'models/' + 'testv3-0.001-30.model'
 model.load(MODEL_NAME)
 
 print('We have loaded a previous model!!!!')

@@ -18,8 +18,16 @@ HEIGHT = 300
 LR = 1e-3
 EPOCHS = 30
 
-MODEL_NAME = 'models/testv4.1-{}-{}.model'.format(LR, EPOCHS)
-PREV_MODEL = 'models/testv4.1-{}-{}.model'.format(LR, EPOCHS)
+MODEL_NAME = 'testv4.1-{}-{}.model'.format(LR, EPOCHS)
+PREV_MODEL = 'testv4.1-{}-{}.model'.format(LR, EPOCHS)
+
+MODEL_SAVE_LOC = os.path.join('models', MODEL_NAME)
+MODEL_SAVE_LOC = os.path.join(os.getcwd(), MODEL_SAVE_LOC)
+
+PREVM_SAVE_LOC = os.path.join('models', MODEL_NAME)
+PREVM_SAVE_LOC = os.path.join(os.getcwd(), MODEL_SAVE_LOC)
+print(MODEL_SAVE_LOC)
+print(PREVM_SAVE_LOC)
 
 LOAD_MODEL = True
 
@@ -47,7 +55,7 @@ nk = [0,0,0,0,0,0,0,0,1]
 model = googlenet(WIDTH, HEIGHT, 3, LR, output=9, model_name=MODEL_NAME)
 
 if LOAD_MODEL:
-    model.load(PREV_MODEL)
+    model.load(PREVM_SAVE_LOC)
     print('We have loaded a previous model!!!!')
     
 
@@ -83,7 +91,7 @@ for e in range(EPOCHS):
 
             # #
             # always validating unique data: 
-            #shuffle(train_data)
+            #shuffle(train_data)s
             train = train_data[:-50]
             test = train_data[-50:]
 
@@ -104,7 +112,7 @@ for e in range(EPOCHS):
             #     model.save(MODEL_NAME)
 
             print('SAVING MODEL!')
-            model.save(MODEL_NAME)
+            model.save(MODEL_SAVE_LOC)
                     
         except Exception as e:
             print(str(e))
