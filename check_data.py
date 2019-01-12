@@ -5,7 +5,7 @@ from random import shuffle
 import cv2
 import os
 
-path = 'training4'
+path = 'training'
 
 # Get address of current working directory
 folder =  os.path.join(os.getcwd(), path)
@@ -13,7 +13,8 @@ folder =  os.path.join(os.getcwd(), path)
 filenames = os.listdir(folder)
 
 
-train_data = np.load(os.path.join(folder, 'training_data-1v2.npy'))
+train_data = np.load(os.path.join(folder, 'training5/training5_data-11v2.npy'))
+shuffle(train_data)
 print(train_data.shape)
 
 for data in train_data:

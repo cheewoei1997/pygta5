@@ -66,3 +66,7 @@ models/
 training/
 log/
 .vscode
+training3test/
+m-alexnet/
+m-inception_v3/
+checkpoint

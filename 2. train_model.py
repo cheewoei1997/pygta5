@@ -6,6 +6,7 @@ import os
 import pandas as pd
 from tqdm import tqdm
 from collections import deque
+from models import alexnet3 as alexnet3
 from models import inception_v3 as googlenet
 from random import shuffle
 import tensorflow as tf
@@ -18,14 +19,29 @@ HEIGHT = 300
 LR = 1e-3
 EPOCHS = 30
 
-MODEL_NAME = 'testv4.1-{}-{}.model'.format(LR, EPOCHS)
-PREV_MODEL = 'testv4.1-{}-{}.model'.format(LR, EPOCHS)
+# MODEL_NAME = 'testv4.1-{}-{}.model'.format(LR, EPOCHS)
+# PREV_MODEL = 'testv4.1-{}-{}.model'.format(LR, EPOCHS)
 
-MODEL_SAVE_LOC = os.path.join('models', MODEL_NAME)
+# MODEL_SAVE_LOC = os.path.join('m-inception_v3', MODEL_NAME)
+# MODEL_SAVE_LOC = os.path.join(os.getcwd(), MODEL_SAVE_LOC)
+
+# PREVM_SAVE_LOC = os.path.join('m-inception_v3', MODEL_NAME)
+# PREVM_SAVE_LOC = os.path.join(os.getcwd(), MODEL_SAVE_LOC)
+
+MODEL_NAME = 'm-alexnetv4.1-{}-{}'.format(LR, EPOCHS)
+PREV_MODEL = 'm-alexnetv4.1-{}-{}'.format(LR, EPOCHS)
+
+MODEL_SAVE_LOC = os.path.join('m-alexnet', MODEL_NAME)
 MODEL_SAVE_LOC = os.path.join(os.getcwd(), MODEL_SAVE_LOC)
 
-PREVM_SAVE_LOC = os.path.join('models', MODEL_NAME)
+PREVM_SAVE_LOC = os.path.join('m-alexnet', MODEL_NAME)
 PREVM_SAVE_LOC = os.path.join(os.getcwd(), MODEL_SAVE_LOC)
+
+# Specially for alexnet
+# MODEL_NAME = 'model_alexnet-46782'
+# MODEL_SAVE_LOC = 'model_alexnet-46782'
+# PREVM_SAVE_LOC = 'model_alexnet-46782'
+
 print(MODEL_SAVE_LOC)
 print(PREVM_SAVE_LOC)
 
@@ -52,11 +68,15 @@ sa = [0,0,0,0,0,0,1,0,0]
 sd = [0,0,0,0,0,0,0,1,0]
 nk = [0,0,0,0,0,0,0,0,1]
 
+# model = alexnet3(WIDTH, HEIGHT, 3, LR, output=9, model_name=MODEL_NAME)
 model = googlenet(WIDTH, HEIGHT, 3, LR, output=9, model_name=MODEL_NAME)
 
 if LOAD_MODEL:
     model.load(PREVM_SAVE_LOC)
     print('We have loaded a previous model!!!!')
+    # print('Loading model from the checkpoint...')
+    # checkpoint = tf.train.latest_checkpoint('checkpoint')
+    # saver.restore(sess, checkpoint)
     
 
 # iterates through the training files
@@ -91,7 +111,7 @@ for e in range(EPOCHS):
 
             # #
             # always validating unique data: 
-            #shuffle(train_data)s
+            shuffle(train_data)
             train = train_data[:-50]
             test = train_data[-50:]
 
@@ -103,6 +123,8 @@ for e in range(EPOCHS):
             test_x = np.array([i[0] for i in test]).reshape(-1,WIDTH,HEIGHT,3)
             test_y = [i[1] for i in test]
 
+            # model.fit({'input': X}, {'targets': Y}, n_epoch=1, validation_set=({'input': test_x}, {'targets': test_y}), 
+            #     snapshot_step=2500, show_metric=True, run_id=MODEL_NAME, batch_size=4)
             model.fit({'input': X}, {'targets': Y}, n_epoch=1, validation_set=({'input': test_x}, {'targets': test_y}), 
                 snapshot_step=2500, show_metric=True, run_id=MODEL_NAME, batch_size=4)
 

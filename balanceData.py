@@ -8,10 +8,10 @@ import cv2
 import os
 
 
-path = 'training3'
+path = 'training5'
 
 # Get address of current working directory
-folder =  os.path.join(os.getcwd(), path)
+folder =  os.path.join(os.getcwd(), 'training', path)
 # Gets all contents of the address of folder
 filenames = os.listdir(folder)
 
@@ -51,7 +51,7 @@ for filename in filenames:
     sdl = []
     nkl = []
 
-    ##shuffle(train_data)
+    # shuffle(train_data)
     print(train_data.shape)
 
     for data in train_data:
@@ -79,13 +79,13 @@ for filename in filenames:
         else:
             print('no matches')
 
-    wl = wl[:len(wal)][:len(wdl)]
-    al = al[:len(wl)]
-    dl = dl[:len(wl)]
-    sl = sl[:len(wl)]
-    wal = wal[:len(wl)]
-    wdl = wdl[:len(wl)]
-    nkl = nkl[:len(wl)]
+    wl = wl[:len(al)][:len(sl)][:len(dl)][:len(wdl)][:len(wal)][:len(nkl)]
+    al = al[:len(wl)][:len(sl)][:len(dl)][:len(wdl)][:len(wal)][:len(nkl)]
+    dl = dl[:len(al)][:len(sl)][:len(wl)][:len(wdl)][:len(wal)][:len(nkl)]
+    sl = sl[:len(al)][:len(wl)][:len(dl)][:len(wdl)][:len(wal)][:len(nkl)]
+    wal = wal[:len(al)][:len(sl)][:len(dl)][:len(wdl)][:len(wl)][:len(nkl)]
+    wdl = wdl[:len(al)][:len(sl)][:len(dl)][:len(wl)][:len(wal)][:len(nkl)]
+    nkl = nkl[:len(al)][:len(sl)][:len(dl)][:len(wdl)][:len(wal)][:len(wl)]
 
     print('nk: ', len(nkl))
     print('w: ', len(wl))
@@ -94,21 +94,12 @@ for filename in filenames:
     print('wa: ', len(wal))
     print('wd: ', len(wdl))
 
-    final_data = wl + al + sl + dl + wal + wdl + sal + sdl + nkl
-    shuffle(final_data)
-    # print(final_data)
+    # final_data = wl + al + sl + dl + wal + wdl + sal + sdl + nkl
+    # shuffle(final_data)
+    # # print(final_data)
 
-    np.save(os.path.join(folder, 'training_balanced{}v1.npy'.format(count)), final_data)
-    count += 1
-
-    ##forwards = forwards[:len(lefts)][:len(rights)]
-    ##lefts = lefts[:len(forwards)]
-    ##rights = rights[:len(forwards)]
-    ##
-    ##final_data = forwards + lefts + rights
-    ##shuffle(final_data)
-    ##
-    ##np.save('training_data.npy', final_data)
+    # np.save(os.path.join(folder, 'training_balanced{}v1.npy'.format(count)), final_data)
+    # count += 1
 
 
 
