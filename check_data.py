@@ -5,15 +5,15 @@ from random import shuffle
 import cv2
 import os
 
-path = 'training'
+path = 'training5'
 
 # Get address of current working directory
-folder =  os.path.join(os.getcwd(), path)
+folder =  os.path.join(os.getcwd(), 'training', path)
 # Gets all contents of the address of folder
 filenames = os.listdir(folder)
 
 
-train_data = np.load(os.path.join(folder, 'training5/training5_data-11v2.npy'))
+train_data = np.load(os.path.join(folder, 'training5_balanced7v1.npy'))
 shuffle(train_data)
 print(train_data.shape)
 

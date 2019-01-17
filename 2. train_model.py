@@ -6,13 +6,13 @@ import os
 import pandas as pd
 from tqdm import tqdm
 from collections import deque
-from models import alexnet3 as alexnet3
+from models import alexnet3 as alexnet
 from models import inception_v3 as googlenet
 from random import shuffle
 import tensorflow as tf
 
 
-FILE_I_END = 109
+FILE_I_END = 10
 
 WIDTH = 400
 HEIGHT = 300
@@ -28,13 +28,13 @@ EPOCHS = 30
 # PREVM_SAVE_LOC = os.path.join('m-inception_v3', MODEL_NAME)
 # PREVM_SAVE_LOC = os.path.join(os.getcwd(), MODEL_SAVE_LOC)
 
-MODEL_NAME = 'm-alexnetv4.1-{}-{}'.format(LR, EPOCHS)
-PREV_MODEL = 'm-alexnetv4.1-{}-{}'.format(LR, EPOCHS)
+MODEL_NAME = 'm-alexnetv9-{}-{}'.format(LR, EPOCHS)
+PREV_MODEL = 'm-alexnetv9-{}-{}'.format(LR, EPOCHS)
 
-MODEL_SAVE_LOC = os.path.join('m-alexnet', MODEL_NAME)
+MODEL_SAVE_LOC = os.path.join('m-alexnetv9', MODEL_NAME)
 MODEL_SAVE_LOC = os.path.join(os.getcwd(), MODEL_SAVE_LOC)
 
-PREVM_SAVE_LOC = os.path.join('m-alexnet', MODEL_NAME)
+PREVM_SAVE_LOC = os.path.join('m-alexnetv9', MODEL_NAME)
 PREVM_SAVE_LOC = os.path.join(os.getcwd(), MODEL_SAVE_LOC)
 
 # Specially for alexnet
@@ -69,7 +69,7 @@ sd = [0,0,0,0,0,0,0,1,0]
 nk = [0,0,0,0,0,0,0,0,1]
 
 # model = alexnet3(WIDTH, HEIGHT, 3, LR, output=9, model_name=MODEL_NAME)
-model = googlenet(WIDTH, HEIGHT, 3, LR, output=9, model_name=MODEL_NAME)
+model = alexnet(WIDTH, HEIGHT, 3, LR, output=9, model_name=MODEL_NAME)
 
 if LOAD_MODEL:
     model.load(PREVM_SAVE_LOC)
@@ -90,10 +90,10 @@ for e in range(EPOCHS):
     for count,i in enumerate(data_order):
         
         try:
-            file_name = 'C:/Github/pygta5/training/training5/training5_data-{}v2.npy'.format(i)
+            file_name = 'C:/Github/pygta5/training/training5/training5_balanced{}v1.npy'.format(i)
             # full file info
             train_data = np.load(file_name)
-            print('training5_data-{}.npy'.format(i),len(train_data))
+            print('Training', file_name, len(train_data))
 
 ##            # [   [    [FRAMES], CHOICE   ]    ] 
 ##            train_data = []
@@ -111,9 +111,11 @@ for e in range(EPOCHS):
 
             # #
             # always validating unique data: 
+            split_data = round(len(train_data)/10)
+
             shuffle(train_data)
-            train = train_data[:-50]
-            test = train_data[-50:]
+            train = train_data[:-split_data]
+            test = train_data[-split_data:]
 
             X = np.array([i[0] for i in train]).reshape(-1,WIDTH,HEIGHT,3)
             Y = [i[1] for i in train]
@@ -133,8 +135,9 @@ for e in range(EPOCHS):
             #     print('SAVING MODEL!')
             #     model.save(MODEL_NAME)
 
-            print('SAVING MODEL!')
+            print('SAVING MODEL at', MODEL_SAVE_LOC)
             model.save(MODEL_SAVE_LOC)
+            print('MODEL SAVED')
                     
         except Exception as e:
             print(str(e))

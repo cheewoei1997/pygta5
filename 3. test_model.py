@@ -4,12 +4,14 @@ import cv2
 import time
 from directkeys import PressKey,ReleaseKey, W, A, S, D
 from models import inception_v3 as googlenet
+from models import alexnet3 as alexnet
 from getkeys import key_check
 from collections import deque, Counter
 import random
 from statistics import mode,mean
 import numpy as np
 from motion import motion_detection
+import os
 
 GAME_WIDTH = 800
 GAME_HEIGHT = 600
@@ -125,11 +127,10 @@ def no_keys():
     
 sleep_duration = 0.1
 
-model = googlenet(WIDTH, HEIGHT, 3, LR, output=9)
-MODEL_NAME = 'models/' + 'testv3-0.001-30.model'
+model = alexnet(WIDTH, HEIGHT, 3, LR, output=9)
+MODEL_NAME = os.path.join('m-alexnetv9/' + 'm-alexnetv9-0.001-30')
 model.load(MODEL_NAME)
-
-print('We have loaded a previous model!!!!')
+print('Model {}'.format(MODEL_NAME), ' loaded')
 
 def main():
     last_time = time.time()

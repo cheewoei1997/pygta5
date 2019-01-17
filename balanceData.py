@@ -28,14 +28,18 @@ sa = [0,0,0,0,0,0,1,0,0]
 sd = [0,0,0,0,0,0,0,1,0]
 nk = [0,0,0,0,0,0,0,0,1]
 
+checkLen = 0
 count = 1
+count2 = 1
+
+balanced = []
 
 for filename in filenames:
     train_data = np.load(os.path.join(folder, filename))
 
     df = pd.DataFrame(train_data)
-    print(df.head())
-    print(Counter(df[1].apply(str)))
+    # print(df.head())
+    # print(Counter(df[1].apply(str)))
 
     lefts = []
     rights = []
@@ -79,28 +83,39 @@ for filename in filenames:
         else:
             print('no matches')
 
-    wl = wl[:len(al)][:len(sl)][:len(dl)][:len(wdl)][:len(wal)][:len(nkl)]
-    al = al[:len(wl)][:len(sl)][:len(dl)][:len(wdl)][:len(wal)][:len(nkl)]
-    dl = dl[:len(al)][:len(sl)][:len(wl)][:len(wdl)][:len(wal)][:len(nkl)]
-    sl = sl[:len(al)][:len(wl)][:len(dl)][:len(wdl)][:len(wal)][:len(nkl)]
-    wal = wal[:len(al)][:len(sl)][:len(dl)][:len(wdl)][:len(wl)][:len(nkl)]
-    wdl = wdl[:len(al)][:len(sl)][:len(dl)][:len(wl)][:len(wal)][:len(nkl)]
-    nkl = nkl[:len(al)][:len(sl)][:len(dl)][:len(wdl)][:len(wal)][:len(wl)]
+    wl = wl[:len(wdl)][:len(wal)][:len(nkl)]
+    wal = wal[:len(wdl)][:len(wl)][:len(nkl)]
+    wdl = wdl[:len(wl)][:len(wal)][:len(nkl)]
+    nkl = nkl[:len(wdl)][:len(wal)][:len(wl)]
 
-    print('nk: ', len(nkl))
-    print('w: ', len(wl))
-    print('a: ', len(al))
-    print('d: ', len(dl))
-    print('wa: ', len(wal))
-    print('wd: ', len(wdl))
+    # wl = wl[:len(al)][:len(dl)][:len(wdl)][:len(wal)][:len(nkl)]
+    # wal = wal[:len(al)][:len(dl)][:len(wdl)][:len(wl)][:len(nkl)]
+    # wdl = wdl[:len(al)][:len(dl)][:len(wl)][:len(wal)][:len(nkl)]
+    # nkl = nkl[:len(al)][:len(dl)][:len(wdl)][:len(wal)][:len(wl)]
 
-    # final_data = wl + al + sl + dl + wal + wdl + sal + sdl + nkl
-    # shuffle(final_data)
-    # # print(final_data)
+    # print('nk: ', len(nkl))
+    # print('w: ', len(wl))
+    # print('a: ', len(al))
+    # print('d: ', len(dl))
+    # print('wa: ', len(wal))
+    # print('wd: ', len(wdl))
+
+    final_data = wl + al + sl + dl + wal + wdl + sal + sdl + nkl
+    shuffle(final_data)
+    balanced.extend(final_data)
+    # print(final_data)
+
+    # checkLen += int(len(final_data))
+    # print(checkLen)
 
     # np.save(os.path.join(folder, 'training_balanced{}v1.npy'.format(count)), final_data)
-    # count += 1
 
+    if (count % 10 == 0):
+        print('Data shape:', len(balanced))
+        np.save(os.path.join(folder, 'training5_balanced{}v1.npy'.format(count2)), balanced)
+        count2 += 1
+        balanced = []
 
+    count += 1
 
 

@@ -62,11 +62,15 @@ docs/_build/
 target/
 
 # Neural Net Stuff
-models/
-training/
 log/
 .vscode
+venv/
+
+# Training dataset
+training/
 training3test/
-m-alexnet/
+
+# Models
+m-alexnetv7/
+m-alexnetv9/
 m-inception_v3/
-checkpoint
