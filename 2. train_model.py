@@ -28,15 +28,13 @@ EPOCHS = 30
 # PREVM_SAVE_LOC = os.path.join('m-inception_v3', MODEL_NAME)
 # PREVM_SAVE_LOC = os.path.join(os.getcwd(), MODEL_SAVE_LOC)
 
-MODEL_FOLDER = 'm-alexnetv1-830m'
+MODEL_NAME = 'm-alexnetv4-{}-{}'.format(LR, EPOCHS)
+PREV_MODEL = 'm-alexnetv4-{}-{}'.format(LR, EPOCHS)
 
-MODEL_NAME = '{}-{}-{}'.format(MODEL_FOLDER, LR, EPOCHS)
-PREV_MODEL = '{}-{}-{}'.format(MODEL_FOLDER, LR, EPOCHS)
-
-MODEL_SAVE_LOC = os.path.join(MODEL_FOLDER, MODEL_NAME)
+MODEL_SAVE_LOC = os.path.join('m-alexnetv4-1050ti', MODEL_NAME)
 MODEL_SAVE_LOC = os.path.join(os.getcwd(), MODEL_SAVE_LOC)
 
-PREVM_SAVE_LOC = os.path.join(MODEL_FOLDER, MODEL_NAME)
+PREVM_SAVE_LOC = os.path.join('m-alexnetv4-1050ti', MODEL_NAME)
 PREVM_SAVE_LOC = os.path.join(os.getcwd(), MODEL_SAVE_LOC)
 
 # Specially for alexnet
