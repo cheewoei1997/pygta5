@@ -28,6 +28,11 @@ HEIGHT = 300
 LR = 1e-3
 EPOCHS = 30
 
+model = alexnet(WIDTH, HEIGHT, 3, LR, output=9)
+MODEL_NAME = os.path.join('m-alexnetv4-1050ti-11520/' + 'm-alexnetv4-0.001-30')
+model.load(MODEL_NAME)
+print('Model {}'.format(MODEL_NAME), ' loaded')
+
 choices = deque([], maxlen=5)
 hl_hist = 250
 choice_hist = deque([], maxlen=hl_hist)
@@ -127,11 +132,6 @@ def no_keys():
     
 sleep_duration = 0.1
 
-model = alexnet(WIDTH, HEIGHT, 3, LR, output=9)
-MODEL_NAME = os.path.join('m-alexnetv9/' + 'm-alexnetv9-0.001-30')
-model.load(MODEL_NAME)
-print('Model {}'.format(MODEL_NAME), ' loaded')
-
 def main():
     last_time = time.time()
     for i in list(range(4))[::-1]:
@@ -170,6 +170,7 @@ def main():
             # print("%.5f" % (prediction))
             # prediction = np.array(prediction) * np.array([4.5, 0.1, 0.1, 0.1,  1.8,   1.8, 0.5, 0.5, 0.2])
             # prediction = np.array(prediction) * np.array([1.0, 0.1, 0.1, 0.1,  1.0,   1.0, 0.5, 0.5, 1.0])
+            prediction = np.array(prediction) * np.array([1.5, 1.0, 1.0, 1.0,  1.0,   1.0, 1.0, 1.0, 1.0])
 
             # Print confidence level for each output
             print("w: %.5f" % (prediction[0]))

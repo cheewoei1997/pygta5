@@ -8,12 +8,15 @@ import cv2
 import os
 
 
-path = 'training5'
+path = 'training7'
 
 # Get address of current working directory
 folder =  os.path.join(os.getcwd(), 'training', path)
 # Gets all contents of the address of folder
-filenames = os.listdir(folder)
+# filenames = os.listdir(folder)
+filenames = ['training7_data-65v1.npy', 'training7_data-6v1.npy',
+                'training7_data-7v1.npy', 'training7_data-8v1.npy',
+                'training7_data-9v1.npy']
 
 # for filename in filenames:
 #     print(os.path.join(folder, filename))
@@ -36,8 +39,9 @@ balanced = []
 
 for filename in filenames:
     train_data = np.load(os.path.join(folder, filename))
+    print(filename, train_data.shape)
 
-    df = pd.DataFrame(train_data)
+    # df = pd.DataFrame(train_data)
     # print(df.head())
     # print(Counter(df[1].apply(str)))
 
@@ -56,7 +60,6 @@ for filename in filenames:
     nkl = []
 
     # shuffle(train_data)
-    print(train_data.shape)
 
     for data in train_data:
         img = data[0]
@@ -110,11 +113,10 @@ for filename in filenames:
 
     # np.save(os.path.join(folder, 'training_balanced{}v1.npy'.format(count)), final_data)
 
-    if (count % 10 == 0):
-        print('Data shape:', len(balanced))
-        np.save(os.path.join(folder, 'training5_balanced{}v1.npy'.format(count2)), balanced)
-        count2 += 1
-        balanced = []
+    # if (count % 10 == 0):
+    print('Data shape:', len(balanced))
+    np.save(os.path.join(folder, 'training7_balanced-{}v1.npy'.format('7')), balanced)
+    count2 += 1
 
     count += 1
 

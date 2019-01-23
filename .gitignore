@@ -71,6 +71,5 @@ training/
 training3test/
 
 # Models
-m-alexnetv7/
-m-alexnetv9/
-m-inception_v3/
+m-*/
+test/

@@ -12,7 +12,7 @@ from random import shuffle
 import tensorflow as tf
 
 
-FILE_I_END = 10
+FILE_I_END = 7
 
 WIDTH = 400
 HEIGHT = 300
@@ -28,13 +28,15 @@ EPOCHS = 30
 # PREVM_SAVE_LOC = os.path.join('m-inception_v3', MODEL_NAME)
 # PREVM_SAVE_LOC = os.path.join(os.getcwd(), MODEL_SAVE_LOC)
 
-MODEL_NAME = 'm-alexnetv9-{}-{}'.format(LR, EPOCHS)
-PREV_MODEL = 'm-alexnetv9-{}-{}'.format(LR, EPOCHS)
+MODEL_FOLDER = 'm-alexnetv1-830m'
 
-MODEL_SAVE_LOC = os.path.join('m-alexnetv9', MODEL_NAME)
+MODEL_NAME = '{}-{}-{}'.format(MODEL_FOLDER, LR, EPOCHS)
+PREV_MODEL = '{}-{}-{}'.format(MODEL_FOLDER, LR, EPOCHS)
+
+MODEL_SAVE_LOC = os.path.join(MODEL_FOLDER, MODEL_NAME)
 MODEL_SAVE_LOC = os.path.join(os.getcwd(), MODEL_SAVE_LOC)
 
-PREVM_SAVE_LOC = os.path.join('m-alexnetv9', MODEL_NAME)
+PREVM_SAVE_LOC = os.path.join(MODEL_FOLDER, MODEL_NAME)
 PREVM_SAVE_LOC = os.path.join(os.getcwd(), MODEL_SAVE_LOC)
 
 # Specially for alexnet
@@ -45,7 +47,7 @@ PREVM_SAVE_LOC = os.path.join(os.getcwd(), MODEL_SAVE_LOC)
 print(MODEL_SAVE_LOC)
 print(PREVM_SAVE_LOC)
 
-LOAD_MODEL = True
+LOAD_MODEL = False
 
 wl = 0
 sl = 0
@@ -90,7 +92,7 @@ for e in range(EPOCHS):
     for count,i in enumerate(data_order):
         
         try:
-            file_name = 'C:/Github/pygta5/training/training5/training5_balanced{}v1.npy'.format(i)
+            file_name = 'C:/Github/pygta5/training/training7/training7_balanced-{}v1.npy'.format(i)
             # full file info
             train_data = np.load(file_name)
             print('Training', file_name, len(train_data))
@@ -134,6 +136,9 @@ for e in range(EPOCHS):
             # if count%100 == 0:
             #     print('SAVING MODEL!')
             #     model.save(MODEL_NAME)
+
+            os.system('copy {} {}-backup'.format(MODEL_FOLDER, MODEL_FOLDER))
+            print('Backup done')
 
             print('SAVING MODEL at', MODEL_SAVE_LOC)
             model.save(MODEL_SAVE_LOC)

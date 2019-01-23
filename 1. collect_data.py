@@ -21,10 +21,10 @@ sa = [0,0,0,0,0,0,1,0,0]
 sd = [0,0,0,0,0,0,0,1,0]
 nk = [0,0,0,0,0,0,0,0,1]
 
-starting_value = 1
+starting_value = 1  
 
 while True:
-    file_name = 'training5_data-{}v3.npy'.format(starting_value)
+    file_name = 'C:/GitHub/pygta5/training/training8/training8_data-{}v1.npy'.format(starting_value)
 
     if os.path.isfile(file_name):
         print('File exists, moving along',starting_value)
@@ -110,7 +110,7 @@ def main(file_name, starting_value):
                     print('SAVED')
                     training_data = []
                     starting_value += 1
-                    file_name = 'C:/Github/pygta5/training/training5/training5_data-{}v3.npy'.format(starting_value)
+                    file_name = 'C:/Github/pygta5/training/training8/training8_data-{}v1.npy'.format(starting_value)
 
                     
         keys = key_check()
@@ -123,6 +123,10 @@ def main(file_name, starting_value):
                 print('Pausing!')
                 paused = True
                 time.sleep(1)
+
+        if 'Y' in keys:
+            training_data = []
+            print('Training data cleared')
 
 
 main(file_name, starting_value)
