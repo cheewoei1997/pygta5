@@ -71,9 +71,5 @@ training/
 training3test/
 
 # Models
-<<<<<<< HEAD
-m-*/
-=======
 m-*/
 test/
->>>>>>> 83ff3b8300648fe817617c760a250e4dd5e2cdbf
