@@ -128,7 +128,7 @@ def no_keys():
 sleep_duration = 0.1
 
 model = alexnet(WIDTH, HEIGHT, 3, LR, output=9)
-MODEL_NAME = os.path.join('m-alexnetv9/' + 'm-alexnetv9-0.001-30')
+MODEL_NAME = os.path.join('m-alexnetv4-1050ti/' + 'm-alexnetv4-0.001-30')
 model.load(MODEL_NAME)
 print('Model {}'.format(MODEL_NAME), ' loaded')
 
