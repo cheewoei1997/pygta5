@@ -12,7 +12,11 @@ from random import shuffle
 import tensorflow as tf
 
 
+<<<<<<< HEAD
 FILE_I_END = 16
+=======
+FILE_I_END = 7
+>>>>>>> 83ff3b8300648fe817617c760a250e4dd5e2cdbf
 
 WIDTH = 400
 HEIGHT = 300
@@ -28,6 +32,11 @@ EPOCHS = 30
 # PREVM_SAVE_LOC = os.path.join('m-inception_v3', MODEL_NAME)
 # PREVM_SAVE_LOC = os.path.join(os.getcwd(), MODEL_SAVE_LOC)
 
+<<<<<<< HEAD
+MODEL_NAME = 'm-alexnetv4-{}-{}'.format(LR, EPOCHS)
+PREV_MODEL = 'm-alexnetv4-{}-{}'.format(LR, EPOCHS)
+=======
+<<<<<<< HEAD
 MODEL_NAME = 'm-alexnetv4-{}-{}'.format(LR, EPOCHS)
 PREV_MODEL = 'm-alexnetv4-{}-{}'.format(LR, EPOCHS)
 
@@ -35,6 +44,20 @@ MODEL_SAVE_LOC = os.path.join('m-alexnetv4-1050ti', MODEL_NAME)
 MODEL_SAVE_LOC = os.path.join(os.getcwd(), MODEL_SAVE_LOC)
 
 PREVM_SAVE_LOC = os.path.join('m-alexnetv4-1050ti', MODEL_NAME)
+=======
+MODEL_NAME = 'm-alexnetv10-{}-{}'.format(LR, EPOCHS)
+PREV_MODEL = 'm-alexnetv10-{}-{}'.format(LR, EPOCHS)
+>>>>>>> 83ff3b8300648fe817617c760a250e4dd5e2cdbf
+
+MODEL_SAVE_LOC = os.path.join('m-alexnetv4-1050ti', MODEL_NAME)
+MODEL_SAVE_LOC = os.path.join(os.getcwd(), MODEL_SAVE_LOC)
+
+<<<<<<< HEAD
+PREVM_SAVE_LOC = os.path.join('m-alexnetv4-1050ti', MODEL_NAME)
+=======
+PREVM_SAVE_LOC = os.path.join('m-alexnetv10', MODEL_NAME)
+>>>>>>> b13fa24fb2b9295caef8c317ab7d381d72e8649f
+>>>>>>> 83ff3b8300648fe817617c760a250e4dd5e2cdbf
 PREVM_SAVE_LOC = os.path.join(os.getcwd(), MODEL_SAVE_LOC)
 
 # Specially for alexnet
@@ -90,7 +113,11 @@ for e in range(EPOCHS):
     for count,i in enumerate(data_order):
         
         try:
+<<<<<<< HEAD
             file_name = 'D:/Github/pygta5/training/training8/training8_complete-{}v1.npy'.format(i)
+=======
+            file_name = 'C:/Github/pygta5/training/training7/training7_balanced-{}v1.npy'.format(i)
+>>>>>>> 83ff3b8300648fe817617c760a250e4dd5e2cdbf
             # full file info
             train_data = np.load(file_name)
             print('Training', file_name, len(train_data))
@@ -135,7 +162,11 @@ for e in range(EPOCHS):
             #     print('SAVING MODEL!')
             #     model.save(MODEL_NAME)
 
+<<<<<<< HEAD
             os.system('copy m-alexnetv4-1050ti m-alexnetv4-1050ti-backup')
+=======
+            os.system('copy {} {}-backup'.format(MODEL_FOLDER, MODEL_FOLDER))
+>>>>>>> 83ff3b8300648fe817617c760a250e4dd5e2cdbf
             print('Backup done')
 
             print('SAVING MODEL at', MODEL_SAVE_LOC)
