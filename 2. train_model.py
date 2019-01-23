@@ -11,22 +11,14 @@ from models import inception_v3 as googlenet
 from random import shuffle
 import tensorflow as tf
 
+# ================================================================================
 
-FILE_I_END = 7
+FILE_I_END = 16
 
 WIDTH = 400
 HEIGHT = 300
 LR = 1e-3
 EPOCHS = 30
-
-# MODEL_NAME = 'testv4.1-{}-{}.model'.format(LR, EPOCHS)
-# PREV_MODEL = 'testv4.1-{}-{}.model'.format(LR, EPOCHS)
-
-# MODEL_SAVE_LOC = os.path.join('m-inception_v3', MODEL_NAME)
-# MODEL_SAVE_LOC = os.path.join(os.getcwd(), MODEL_SAVE_LOC)
-
-# PREVM_SAVE_LOC = os.path.join('m-inception_v3', MODEL_NAME)
-# PREVM_SAVE_LOC = os.path.join(os.getcwd(), MODEL_SAVE_LOC)
 
 MODEL_NAME = 'm-alexnetv4-{}-{}'.format(LR, EPOCHS)
 PREV_MODEL = 'm-alexnetv4-{}-{}'.format(LR, EPOCHS)
@@ -37,10 +29,7 @@ MODEL_SAVE_LOC = os.path.join(os.getcwd(), MODEL_SAVE_LOC)
 PREVM_SAVE_LOC = os.path.join('m-alexnetv4-1050ti', MODEL_NAME)
 PREVM_SAVE_LOC = os.path.join(os.getcwd(), MODEL_SAVE_LOC)
 
-# Specially for alexnet
-# MODEL_NAME = 'model_alexnet-46782'
-# MODEL_SAVE_LOC = 'model_alexnet-46782'
-# PREVM_SAVE_LOC = 'model_alexnet-46782'
+# ================================================================================
 
 print(MODEL_SAVE_LOC)
 print(PREVM_SAVE_LOC)
@@ -128,7 +117,7 @@ for e in range(EPOCHS):
             # model.fit({'input': X}, {'targets': Y}, n_epoch=1, validation_set=({'input': test_x}, {'targets': test_y}), 
             #     snapshot_step=2500, show_metric=True, run_id=MODEL_NAME, batch_size=4)
             model.fit({'input': X}, {'targets': Y}, n_epoch=1, validation_set=({'input': test_x}, {'targets': test_y}), 
-                snapshot_step=2500, show_metric=True, run_id=MODEL_NAME, batch_size=4)
+                snapshot_step=2500, show_metric=True, run_id=MODEL_NAME, batch_size=100)
 
 
             # if count%100 == 0:
