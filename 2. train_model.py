@@ -34,7 +34,7 @@ PREV_MODEL = 'm-alexnetv4-{}-{}'.format(LR, EPOCHS)
 MODEL_SAVE_LOC = os.path.join('m-alexnetv4-1050ti-11520', MODEL_NAME)
 MODEL_SAVE_LOC = os.path.join(os.getcwd(), MODEL_SAVE_LOC)
 
-PREVM_SAVE_LOC = os.path.join('m-alexnetv4-1050ti-11520', MODEL_NAME)
+PREVM_SAVE_LOC = os.path.join('m-alexnetv4-1050ti', MODEL_NAME)
 PREVM_SAVE_LOC = os.path.join(os.getcwd(), MODEL_SAVE_LOC)
 
 # Specially for alexnet
@@ -90,7 +90,7 @@ for e in range(EPOCHS):
     for count,i in enumerate(data_order):
         
         try:
-            file_name = 'C:/Github/pygta5/training/training8/training8_complete-{}v1.npy'.format(i)
+            file_name = 'D:/Github/pygta5/training/training8/training8_complete-{}v1.npy'.format(i)
             # full file info
             train_data = np.load(file_name)
             print('Training', file_name, len(train_data))
@@ -135,7 +135,7 @@ for e in range(EPOCHS):
             #     print('SAVING MODEL!')
             #     model.save(MODEL_NAME)
 
-            os.system('copy m-alexnet-1050ti-11520 m-alexnet-1050ti-11520-backup')
+            os.system('copy m-alexnetv4-1050ti m-alexnetv4-1050ti-backup')
             print('Backup done')
 
             print('SAVING MODEL at', MODEL_SAVE_LOC)
