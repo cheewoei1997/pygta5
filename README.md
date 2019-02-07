@@ -12,16 +12,16 @@ Navigate to the repository that you have cloned and create a virtual environment
 
 The Python that we are using for this project is Python 3.6.6, which can be download at the [official Python website](https://www.python.org/downloads/release/python-366/). After downloading Python 3.6.6, create a virtual environment to ease the process and complexity of setting up.
 
-Point the creation of the virtual environment at the folder where Python was downloaded. An example is seen below.
+Point the creation of the virtual environment at the folder where Python was downloaded. An example is seen below.  
 `virtualenv --python=C:\Users\cheewoei\AppData\Local\Programs\Python\Python36\python.exe venv`
 
-Activate the virtual environment.
+Activate the virtual environment.  
 `.\venv\Scripts\activate`
 
-After activating the virtual environment, the `(venv)` should be seen at the leftmost side of the command line interface. An example in Windows 10 is as below.
+After activating the virtual environment, the `(venv)` should be seen at the leftmost side of the command line interface. An example in Windows 10 is as below.  
 `(venv) PS C:\GitHub\pygta5>`
 
-Install all the necessary packages.
+Install all the necessary packages.  
 `pip install -r requirements.txt`
 
 To have your tensorflow run on the GPU, it is necessary to set up cuDNN and CUDA.
@@ -35,6 +35,7 @@ Make sure to install according to your system's specifications.
 Install the [cuDNN](https://developer.nvidia.com/rdp/cudnn-download) library. Follow the steps specified in the [installation guide](https://docs.nvidia.com/deeplearning/sdk/cudnn-install/index.html#install-windows). Only 3 files would need to be manually placed in the Nvidia GPU Computing Toolkit.
 
 ### Tensorboard
+Run tensorboard to view how your model is doing.
 `tensorboard --logdir=foo:C:\GitHub\pygta5`
 
 ## Model
@@ -49,7 +50,7 @@ Test the model by loading the model that you have trained by running the `3. tes
 
 ## Relevant Links
 https://pythonprogramming.net/game-frames-open-cv-python-plays-gta-v/
-https://pythonprogramming.net/tensorflow-introduction-machine-learning-tutorial/
+https://pythonprogramming.  net/tensorflow-introduction-machine-learning-tutorial/
 
 ## Credits
 [sentdex](https://github.com/Sentdex/pygta5)
