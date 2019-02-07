@@ -21,10 +21,22 @@ sa = [0,0,0,0,0,0,1,0,0]
 sd = [0,0,0,0,0,0,0,1,0]
 nk = [0,0,0,0,0,0,0,0,1]
 
-starting_value = 1  
+starting_value = 1
+train_no = 'training14'
+training_type = 'raw'
+
+# ================================================================================
+
+curr_dir = os.path.join(os.getcwd(), 'training', train_no)
+if os.path.isdir(curr_dir):
+    print('{} exists, saving here.'.format(train_no))
+
+else:
+    os.system('mkdir {}'.format(curr_dir))
+    print('Created {} folder.'.format(train_no))
 
 while True:
-    file_name = 'C:/GitHub/pygta5/training/training8/training8_data-{}v1.npy'.format(starting_value)
+    file_name = 'D:/GitHub/pygta5/training/{}/{}_{}-{}.npy'.format(train_no, train_no, training_type, starting_value)
 
     if os.path.isfile(file_name):
         print('File exists, moving along',starting_value)
@@ -110,7 +122,7 @@ def main(file_name, starting_value):
                     print('SAVED')
                     training_data = []
                     starting_value += 1
-                    file_name = 'C:/Github/pygta5/training/training8/training8_data-{}v1.npy'.format(starting_value)
+                    file_name = 'D:/Github/pygta5/training/{}/{}_{}-{}.npy'.format(train_no, train_no, training_type, starting_value)
 
                     
         keys = key_check()
@@ -123,10 +135,6 @@ def main(file_name, starting_value):
                 print('Pausing!')
                 paused = True
                 time.sleep(1)
-
-        if 'Y' in keys:
-            training_data = []
-            print('Training data cleared')
 
 
 main(file_name, starting_value)
