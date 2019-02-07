@@ -49,8 +49,8 @@ After collecting all the data needed for the training of the model, we feed it i
 Test the model by loading the model that you have trained by running the `3. test_model` file.
 
 ## Relevant Links
-https://pythonprogramming.net/game-frames-open-cv-python-plays-gta-v/
-https://pythonprogramming.  net/tensorflow-introduction-machine-learning-tutorial/
+https://pythonprogramming.net/game-frames-open-cv-python-plays-gta-v/  
+https://pythonprogramming.net/tensorflow-introduction-machine-learning-tutorial/
 
 ## Credits
 [sentdex](https://github.com/Sentdex/pygta5)
