@@ -28,8 +28,13 @@ HEIGHT = 300
 LR = 1e-3
 EPOCHS = 30
 
-model = alexnet(WIDTH, HEIGHT, 3, LR, output=9)
-MODEL_NAME = os.path.join('m-alexnetv4-1050ti/' + 'm-alexnetv4-0.001-30')
+trained_model = 'm-inceptionv3v11'
+# weights = np.array([3.0, 1.0, 50, 50,  1.5,   1.5, 1.0, 1.0, 1.0])
+weights = np.array([1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0])
+
+# model = alexnet(WIDTH, HEIGHT, 3, LR, output=9)
+model = googlenet(WIDTH, HEIGHT, 3, LR, output=9)
+MODEL_NAME = os.path.join('models', '{}-1050ti'.format(trained_model), trained_model)
 model.load(MODEL_NAME)
 print('Model {}'.format(MODEL_NAME), ' loaded')
 
@@ -170,7 +175,7 @@ def main():
             # print("%.5f" % (prediction))
             # prediction = np.array(prediction) * np.array([4.5, 0.1, 0.1, 0.1,  1.8,   1.8, 0.5, 0.5, 0.2])
             # prediction = np.array(prediction) * np.array([1.0, 0.1, 0.1, 0.1,  1.0,   1.0, 0.5, 0.5, 1.0])
-            prediction = np.array(prediction) * np.array([1.5, 1.0, 1.0, 1.0,  1.0,   1.0, 1.0, 1.0, 1.0])
+            prediction = np.array(prediction) * weights
 
             # Print confidence level for each output
             print("w: %.5f" % (prediction[0]))

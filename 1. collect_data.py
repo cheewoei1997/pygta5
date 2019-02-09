@@ -119,10 +119,12 @@ def main(file_name, starting_value):
                 
                 if len(training_data) == 500:
                     np.save(file_name,training_data)
-                    print('SAVED')
+                    file_name = 'D:/Github/pygta5/training/{}/{}_{}-{}.npy'.format(train_no, train_no, training_type, starting_value)
+                    print('=' * 80)
+                    print('SAVED', file_name)
+                    print('=' * 80)
                     training_data = []
                     starting_value += 1
-                    file_name = 'D:/Github/pygta5/training/{}/{}_{}-{}.npy'.format(train_no, train_no, training_type, starting_value)
 
                     
         keys = key_check()
