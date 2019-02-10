@@ -73,3 +73,7 @@ training3test/
 # Models
 m-*/
 test/
+
+# Misc.
+test/
+training/
