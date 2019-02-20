@@ -30,9 +30,9 @@ EPOCHS = 30
 
 sleep_duration = 0
 
-trained_model = 'm-inceptionv3v14'
-# weights = np.array([1.0, 1.0, 1.5, 1.5, 1.0, 1.0, 1.0, 1.0, 1.0])
-weights = np.array([0.7, 1.0, 1.7, 1.4, 1.0, 1.0, 1.0, 1.0, 1.0])
+trained_model = 'm-inceptionv3v11'
+weights = np.array([1.0, 1.0, 1.5, 1.5, 1.0, 1.0, 1.0, 1.0, 1.0])
+# weights = np.array([0.7, 1.0, 1.7, 1.4, 1.0, 1.0, 1.0, 1.0, 1.0])
 
 # trained_model = 'm-inceptionv3v15'
 # weights = np.array([1.0, 3.0, 3.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0])

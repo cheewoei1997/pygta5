@@ -13,8 +13,8 @@ import numpy as np
 from motion import motion_detection
 import os
 
-GAME_WIDTH = 800
-GAME_HEIGHT = 600
+GAME_WIDTH = 400
+GAME_HEIGHT = 300
 
 how_far_remove = 800
 rs = (20,15)
@@ -30,12 +30,13 @@ EPOCHS = 30
 
 sleep_duration = 0
 
-trained_model = 'm-inceptionv3v14'
-# weights = np.array([1.0, 1.0, 1.5, 1.5, 1.0, 1.0, 1.0, 1.0, 1.0])
-weights = np.array([0.7, 1.0, 1.7, 1.4, 1.0, 1.0, 1.0, 1.0, 1.0])
+trained_model = 'm-inceptionv3v15'
+# weights = np.array([3.0, 1.0, 50, 50,  1.5,   1.5, 1.0, 1.0, 1.0])
+# weights = np.array([0.5, 1.0, 0.5, 1.3, 1.0, 1.0, 1.0, 1.0, 0.6])
+# weights = np.array([0.3, 1.0, 1.0, 15.0, 1.0, 1.0, 1.0, 1.0, 0.8])
 
-# trained_model = 'm-inceptionv3v15'
-# weights = np.array([1.0, 3.0, 3.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0])
+weights = np.array([1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0])
+# weights = np.array([0.5, 1.0, 0.3, 1.3, 1.0, 1.0, 1.0, 1.0, 0.6])
 
 # model = alexnet(WIDTH, HEIGHT, 3, LR, output=9)
 model = googlenet(WIDTH, HEIGHT, 3, LR, output=9)
@@ -161,8 +162,13 @@ def main():
     while(True):
         
         if not paused:
-            screen = grab_screen(region=(0,40,GAME_WIDTH,GAME_HEIGHT+30))
+            screen = grab_screen(region=(200,250,200+GAME_WIDTH,250+GAME_HEIGHT))
             screen = cv2.cvtColor(screen, cv2.COLOR_BGR2RGB)
+
+            # cv2.imshow('window', screen)
+            # if cv2.waitKey(25) & 0xFF == ord('q'):
+            #     cv2.destroyAllWindows()
+            #     break
 
             last_time = time.time()
             screen = cv2.resize(screen, (WIDTH,HEIGHT))
@@ -170,10 +176,10 @@ def main():
 
             # delta_count_last = motion_detection(t_minus, t_now, t_plus)
 
-            t_minus = t_now
-            t_now = t_plus
-            t_plus = screen
-            t_plus = cv2.blur(t_plus,(4,4))
+            # t_minus = t_now
+            # t_now = t_plus
+            # t_plus = screen
+            # t_plus = cv2.blur(t_plus,(4,4))
 
             prediction = model.predict([screen.reshape(WIDTH,HEIGHT,3)])[0]
             # print("%.5f" % (prediction))

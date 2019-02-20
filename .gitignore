@@ -68,7 +68,7 @@ venv/
 
 # Training dataset
 training/
-training3test/
+# training3test/
 
 # Models
 m-*/
@@ -76,4 +76,3 @@ test/
 
 # Misc.
 test/
-training/

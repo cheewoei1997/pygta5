@@ -20,7 +20,7 @@ HEIGHT = 300
 LR = 1e-3
 EPOCHS = 10
 
-training_folder = 'training14'
+training_folder = 'training15'
 training_type = 'raw'
 
 MODEL_NAME = 'm-inceptionv3v11'
@@ -70,18 +70,7 @@ if LOAD_MODEL:
     # checkpoint = tf.train.latest_checkpoint('checkpoint')
     # saver.restore(sess, checkpoint)
     
-
-curr_dir = os.path.join(os.getcwd(), 'models', '{}-1050ti-backup'.format(MODEL_NAME))
-
-if os.path.isdir(curr_dir):
-    print('Backup folder exists, moving along')
-
-else:
-    print('Creating a backup folder')
-    os.system('mkdir {}'.format(curr_dir))
-
 # iterates through the training files
-
 
 for e in range(EPOCHS):
     #data_order = [i for i in range(1,FILE_I_END+1)]
@@ -91,7 +80,7 @@ for e in range(EPOCHS):
     for count,i in enumerate(data_order):
         
         try:
-            file_name = 'D:/Github/pygta5/training/{}/{}_{}-{}.npy'.format(training_folder, training_folder, training_type, i)
+            file_name = os.path.join(os.getcwd(), 'training', '{}\{}_{}-{}.npy'.format(training_folder, training_folder, training_type, i))
             # full file info
             train_data = np.load(file_name)
             print('Training', file_name, len(train_data))
@@ -130,14 +119,6 @@ for e in range(EPOCHS):
             #     snapshot_step=2500, show_metric=True, run_id=MODEL_NAME, batch_size=4)
             model.fit({'input': X}, {'targets': Y}, n_epoch=1, validation_set=({'input': test_x}, {'targets': test_y}), 
                 snapshot_step=2500, show_metric=True, run_id=MODEL_NAME, batch_size=30)
-
-
-            # if count%100 == 0:
-            #     print('SAVING MODEL!')
-            #     model.save(MODEL_NAME)
-
-            os.system('copy {}-1050ti {}-1050ti-backup'.format(MODEL_NAME, MODEL_NAME))
-            print('Backup done')
 
             print('SAVING MODEL at', MODEL_SAVE_LOC)
             model.save(MODEL_SAVE_LOC)

@@ -8,8 +8,8 @@ import os
 WIDTH = 400
 HEIGHT = 300
 
-GAME_WIDTH = 800
-GAME_HEIGHT = 600
+GAME_WIDTH = 400
+GAME_HEIGHT = 300
 
 w = [1,0,0,0,0,0,0,0,0]
 s = [0,1,0,0,0,0,0,0,0]
@@ -22,7 +22,7 @@ sd = [0,0,0,0,0,0,0,1,0]
 nk = [0,0,0,0,0,0,0,0,1]
 
 starting_value = 1
-train_no = 'training17'
+train_no = 'training18'
 training_type = 'raw'
 
 # ================================================================================
@@ -90,15 +90,19 @@ def main(file_name, starting_value):
     while(True):
         
         if not paused:
-            screen = grab_screen(region=(0,40,GAME_WIDTH,GAME_HEIGHT+30))
+            screen = grab_screen(region=(200, 250, 199+GAME_WIDTH,249+GAME_HEIGHT))
             last_time = time.time()
             # resize to something a bit more acceptable for a CNN
-            screen = cv2.resize(screen, (WIDTH, HEIGHT))
+            # screen = cv2.resize(screen, (WIDTH, HEIGHT))
             # run a color convert:
             screen = cv2.cvtColor(screen, cv2.COLOR_BGR2RGB)
 
             # Show what is captured
             # cv2.imshow('window', screen)
+            # time.sleep(0.2)
+            # if cv2.waitKey(25) & 0xFF == ord('q'):
+            #     cv2.destroyAllWindows()
+            #     break
             
             keys = key_check()
             output = keys_to_output(keys)
